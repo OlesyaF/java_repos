@@ -5,12 +5,12 @@ public class MyFirstProgram {
   public static void main(String[] args) {
 
     Point p1 = new Point();
-    p1.x = 3;
-    p1.y = 10;
+    p1.x = 5;
+    p1.y = 12;
 
     Point p2 = new Point();
-    p2.x = 12;
-    p2.y = 4;
+    p2.x = 0;
+    p2.y = 0;
 
     System.out.println("Расстояние между точками = " + p1.distance1(p2));
 
