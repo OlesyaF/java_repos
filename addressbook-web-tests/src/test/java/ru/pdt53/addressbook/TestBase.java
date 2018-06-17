@@ -88,7 +88,7 @@ public class TestBase {
       wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 
-  protected void fillNewAddForm(PersonData personData) {
+  protected void fillNewAddForm(ContactData personData) {
       wd.findElement(By.name("firstname")).click();
       wd.findElement(By.name("firstname")).clear();
       wd.findElement(By.name("firstname")).sendKeys(personData.getFirstname());

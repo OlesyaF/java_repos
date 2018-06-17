@@ -1,12 +1,12 @@
 package ru.pdt53.addressbook;
 
-public class PersonData {
+public class ContactData {
   private final String firstname;
   private final String lastname;
   private final String mobile;
   private final String email;
 
-  public PersonData(String firstname, String lastname, String mobile, String email) {
+  public ContactData(String firstname, String lastname, String mobile, String email) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.mobile = mobile;
