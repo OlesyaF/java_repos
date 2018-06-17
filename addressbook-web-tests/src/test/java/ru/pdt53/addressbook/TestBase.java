@@ -83,4 +83,27 @@ public class TestBase {
           wd.findElement(By.name("selected[]")).click();
       }
   }
+
+  protected void saveNewPerson() {
+      wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+  }
+
+  protected void fillNewAddForm(PersonData personData) {
+      wd.findElement(By.name("firstname")).click();
+      wd.findElement(By.name("firstname")).clear();
+      wd.findElement(By.name("firstname")).sendKeys(personData.getFirstname());
+      wd.findElement(By.name("lastname")).click();
+      wd.findElement(By.name("lastname")).clear();
+      wd.findElement(By.name("lastname")).sendKeys(personData.getLastname());
+      wd.findElement(By.name("mobile")).click();
+      wd.findElement(By.name("mobile")).clear();
+      wd.findElement(By.name("mobile")).sendKeys(personData.getMobile());
+      wd.findElement(By.name("email")).click();
+      wd.findElement(By.name("email")).clear();
+      wd.findElement(By.name("email")).sendKeys(personData.getEmail());
+  }
+
+  protected void gotoNewAddPage() {
+      wd.findElement(By.linkText("add new")).click();
+  }
 }
