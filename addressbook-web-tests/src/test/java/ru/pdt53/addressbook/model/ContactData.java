@@ -1,4 +1,4 @@
-package ru.pdt53.addressbook;
+package ru.pdt53.addressbook.model;
 
 public class ContactData {
   private final String firstname;
