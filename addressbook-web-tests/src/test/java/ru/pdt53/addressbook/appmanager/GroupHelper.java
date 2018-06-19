@@ -32,9 +32,9 @@ public class GroupHelper extends BaseHelper {
     click(By.name("delete"));
   }
 
-  public void selectGroup() {
-    if (!wd.findElement(By.name("selected[]")).isSelected()) {
-      click(By.name("selected[]"));
-    }
-  }
+  public void selectGroup() { click(By.name("selected[]")); }
+
+  public void initGroupModification() { click(By.name("edit")); }
+
+  public void submitGroupModification() {  click(By.name("update"));  }
 }
