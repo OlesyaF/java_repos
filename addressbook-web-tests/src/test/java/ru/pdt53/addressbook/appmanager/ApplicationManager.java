@@ -24,11 +24,11 @@ public class ApplicationManager {
   }
 
   public void init() {
-    if (browser == org.openqa.selenium.remote.BrowserType.FIREFOX) {
+    if (browser.equals(org.openqa.selenium.remote.BrowserType.FIREFOX)) {
       wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
-    } else if (browser == org.openqa.selenium.remote.BrowserType.CHROME) {
+    } else if (browser.equals(org.openqa.selenium.remote.BrowserType.CHROME)) {
       wd = new ChromeDriver();
-    } else if (browser == org.openqa.selenium.remote.BrowserType.IE) {
+    } else if (browser.equals(org.openqa.selenium.remote.BrowserType.IE)) {
       wd = new InternetExplorerDriver();
     }
     wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
