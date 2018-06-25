@@ -1,9 +1,7 @@
 package ru.pdt53.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.pdt53.addressbook.model.ContactData;
@@ -35,16 +33,37 @@ public class ContactHelper extends BaseHelper {
     click(By.linkText("add new"));
   }
 
-  public void initContactModification() { click(By.name("modifiy")); }
+  public void initContactModification() {
+    click(By.name("modifiy"));
+  }
 
-  public void submitContactModification() { click(By.name("update")); }
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
 
-  public void selectModificatedContact() { click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[7]/a/img")); }
+  public void selectModificatedContact() {
+    click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[7]/a/img"));
+  }
 
-  public void acceptionContactDeletion() { wd.switchTo().alert().accept(); }
+  public void acceptionContactDeletion() {
+    wd.switchTo().alert().accept();
+  }
 
-  public void deleteSelectedContacts() { click(By.xpath("//div/div[4]/form[2]/div[2]/input")); }
+  public void deleteSelectedContacts() {
+    click(By.xpath("//div/div[4]/form[2]/div[2]/input"));
+  }
 
-  public void selectContact() { click(By.name("selected[]")); }
+  public void selectContact() {
+    click(By.name("selected[]"));
+  }
 
+  public void createContact(ContactData contactData, boolean creation) {
+    gotoNewAddPage();
+    fillNewAddForm(contactData, creation);
+    saveNewContact();
+  }
+
+  public boolean isThereContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
 }
