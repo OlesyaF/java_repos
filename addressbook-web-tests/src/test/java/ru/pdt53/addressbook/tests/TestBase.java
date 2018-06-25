@@ -3,7 +3,6 @@ package ru.pdt53.addressbook.tests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import ru.pdt53.addressbook.appmanager.ApplicationManager;
-import sun.plugin2.util.BrowserType;
 
 public class TestBase {
 
