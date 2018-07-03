@@ -37,16 +37,12 @@ public class ContactHelper extends BaseHelper {
     click(By.linkText("add new"));
   }
 
-  public void initContactModification() {
-    click(By.name("modifiy"));
-  }
-
   public void submitContactModification() {
     click(By.name("update"));
   }
 
-  public void selectModificatedContact() {
-    click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[7]/a/img"));
+  public void selectModificatedContact(int index) {
+    wd.findElements(By.cssSelector("img[title=\"Edit\"]")).get(index).click();
   }
 
   public void acceptionContactDeletion() {
@@ -84,6 +80,5 @@ public class ContactHelper extends BaseHelper {
     }
     return contacts;
   }
-
 
 }
