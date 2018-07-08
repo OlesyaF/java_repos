@@ -45,6 +45,14 @@ public class GroupHelper extends BaseHelper {
     returnToGroupPage();
   }
 
+  public void modifyGroup(int index, GroupData group) {
+    selectGroup(index);
+    initGroupModification();
+    fillGroupForm(group);
+    submitGroupModification();
+    returnToGroupPage();
+  }
+
   public void returnToGroupPage() { click(By.linkText("group page"));  }
 
   public boolean isThereGroup() {
