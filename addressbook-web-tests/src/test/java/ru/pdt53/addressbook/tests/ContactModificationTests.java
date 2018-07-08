@@ -19,7 +19,7 @@ public class ContactModificationTests extends TestBase {
     app.getContactHelper().selectModificatedContact(before.size() - 1);
     app.getContactHelper().fillNewAddForm(contact, false);
     app.getContactHelper().submitContactModification();
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size());
 
