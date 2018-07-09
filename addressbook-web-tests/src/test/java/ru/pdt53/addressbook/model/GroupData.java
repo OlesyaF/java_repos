@@ -18,10 +18,7 @@ public class GroupData {
   }
 
   @Override
-  public int hashCode() {
-
-    return Objects.hash(id, name);
-  }
+  public int hashCode() { return Objects.hash(id, name); }
 
   public int getId() { return id; }
 
@@ -55,7 +52,6 @@ public class GroupData {
   public GroupData withFooter(String footer) {
     this.footer = footer;
     return this;
-
   }
 
   @Override
