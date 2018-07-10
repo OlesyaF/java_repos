@@ -61,34 +61,42 @@ public class ContactHelper extends BaseHelper {
     gotoNewAddPage();
     fillNewAddForm(contact, creation);
     saveNewContact();
+    contactCache = null;
   }
 
   public void modify(ContactData contact, boolean creation) {
    selectModificatedContactById(contact.getId());
    fillNewAddForm(contact, false);
    submitContactModification();
+   contactCache = null;
   }
 
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     deleteSelectedContacts();
     acceptionContactDeletion();
+    contactCache = null;
   }
 
   public boolean isThereContact() {
     return isElementPresent(By.name("selected[]"));
   }
 
+  private Contacts contactCache = null;
+
   public Contacts all() {
-    Contacts contacts = new Contacts();
+    if (contactCache != null) {
+      return new Contacts(contactCache);
+    }
+    contactCache = new Contacts();
     List<WebElement> rows = wd.findElements(By.cssSelector("tr[name=\"entry\"]"));
     for (WebElement row : rows) {
       List<WebElement> cells = row.findElements(By.tagName("td"));
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
       int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
-      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
     }
-    return contacts;
+    return new Contacts(contactCache);
   }
  }
