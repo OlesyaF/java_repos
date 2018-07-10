@@ -23,7 +23,9 @@ public class ContactHelper extends BaseHelper {
   public void fillNewAddForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
+    type(By.name("home"), contactData.getHomePhone());
     type(By.name("mobile"), contactData.getMobilePhone());
+    type(By.name("work"), contactData.getWorkPhone());
     type(By.name("email"), contactData.getEmail());
 
     if (creation) {
@@ -98,10 +100,10 @@ public class ContactHelper extends BaseHelper {
       List<WebElement> cells = row.findElements(By.tagName("td"));
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
+      String allPhones = cells.get(5).getText();
       String[] phones = cells.get(5).getText().split("\n");
       int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
-      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).
-              withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
+      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAllPhones(allPhones));
     }
     return new Contacts(contactCache);
   }

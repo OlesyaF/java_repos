@@ -9,6 +9,7 @@ public class ContactData {
   private String home;
   private String work;
   private String mobile;
+  private String allPhones;
   private String email;
   private String group;
 
@@ -68,6 +69,11 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
   public int getId() { return id; }
 
   public String getFirstname() {
@@ -90,7 +96,9 @@ public class ContactData {
     return email;
   }
 
-  public String getGroup() { return group;  }
+  public String getGroup() { return group; }
+
+  public String getAllPhones() { return allPhones; }
 
   @Override
   public String toString() {
