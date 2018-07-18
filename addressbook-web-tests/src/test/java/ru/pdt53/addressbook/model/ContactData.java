@@ -1,5 +1,6 @@
 package ru.pdt53.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
@@ -16,6 +17,7 @@ public class ContactData {
   private String email3;
   private String allMails;
   private String group;
+  private File photo;
 
   @Override
   public boolean equals(Object o) {
@@ -98,6 +100,11 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
+
   public int getId() { return id; }
 
   public String getFirstname() {
@@ -131,6 +138,8 @@ public class ContactData {
   public String getAllPhones() { return allPhones; }
 
   public String getAllMails() { return allMails; }
+
+  public File getPhoto() { return photo; }
 
   @Override
   public String toString() {
