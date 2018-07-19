@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.pdt53.addressbook.tests.ContactCreationTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-07-19T20:09:59" hostname="lenovo" time="17.491">
+<testsuite name="ru.pdt53.addressbook.tests.ContactCreationTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-07-19T20:53:10" hostname="lenovo" time="24.848">
   <properties/>
-  <testcase name="testContactCreation[0](ContactData{firstname='name0', lastname='fam0'})" classname="ru.pdt53.addressbook.tests.ContactCreationTests" time="8.059"/>
-  <testcase name="testContactCreation[1](ContactData{firstname='name1', lastname='fam1'})" classname="ru.pdt53.addressbook.tests.ContactCreationTests" time="4.958"/>
-  <testcase name="testContactCreation[2](ContactData{firstname='name2', lastname='fam2'})" classname="ru.pdt53.addressbook.tests.ContactCreationTests" time="4.473"/>
+  <testcase name="testContactCreation[0](ContactData{firstname='name0', lastname='fam0'})" classname="ru.pdt53.addressbook.tests.ContactCreationTests" time="11.666"/>
+  <testcase name="testContactCreation[1](ContactData{firstname='name1', lastname='fam1'})" classname="ru.pdt53.addressbook.tests.ContactCreationTests" time="7.039"/>
+  <testcase name="testContactCreation[2](ContactData{firstname='name2', lastname='fam2'})" classname="ru.pdt53.addressbook.tests.ContactCreationTests" time="6.142"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

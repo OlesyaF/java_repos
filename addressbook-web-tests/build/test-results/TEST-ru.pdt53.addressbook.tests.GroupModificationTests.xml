@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.pdt53.addressbook.tests.GroupModificationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-07-19T20:09:54" hostname="lenovo" time="2.766">
+<testsuite name="ru.pdt53.addressbook.tests.GroupModificationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-07-19T21:17:47" hostname="lenovo" time="5.601">
   <properties/>
-  <testcase name="testGroupModification" classname="ru.pdt53.addressbook.tests.GroupModificationTests" time="2.766"/>
+  <testcase name="testGroupModification" classname="ru.pdt53.addressbook.tests.GroupModificationTests" time="5.601"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
