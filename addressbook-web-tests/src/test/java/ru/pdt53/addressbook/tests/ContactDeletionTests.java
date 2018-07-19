@@ -15,12 +15,12 @@ public class ContactDeletionTests extends TestBase {
     if (app.contact().all().size() == 0) {
       app.contact().create(new ContactData()
               .withFirstname("anna").withLastname("petrova").withGroup("groupA"), true);
-      app.goTo().HomePage();
     }
   }
 
   @Test
   public void testContactDeletion() {
+    app.goTo().HomePage();
     Contacts before = app.contact().all();
     ContactData deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);

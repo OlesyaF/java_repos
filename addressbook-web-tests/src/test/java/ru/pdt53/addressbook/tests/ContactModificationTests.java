@@ -15,7 +15,6 @@ public class ContactModificationTests extends TestBase {
     if (app.contact().all().size() == 0) {
       app.contact().create(new ContactData()
               .withFirstname("anna").withLastname("petrova").withEmail("anpet@yandex.ru").withGroup("groupA"), true);
-      app.goTo().HomePage();
     }
   }
 
