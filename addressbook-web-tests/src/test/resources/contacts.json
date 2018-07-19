@@ -3,18 +3,21 @@
     "firstname": "name0",
     "lastname": "fam0",
     "mobile": "+79195050010",
-    "email": "mail0@yandex.ru"
+    "email": "mail0@yandex.ru",
+    "group": "groupA"
   },
   {
     "firstname": "name1",
     "lastname": "fam1",
     "mobile": "+79195050011",
-    "email": "mail1@yandex.ru"
+    "email": "mail1@yandex.ru",
+    "group": "groupA"
   },
   {
     "firstname": "name2",
     "lastname": "fam2",
     "mobile": "+79195050012",
-    "email": "mail2@yandex.ru"
+    "email": "mail2@yandex.ru",
+    "group": "groupA"
   }
 ]
