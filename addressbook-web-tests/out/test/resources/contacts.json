@@ -1,0 +1,20 @@
+[
+  {
+    "firstname": "name0",
+    "lastname": "fam0",
+    "mobile": "+79195050010",
+    "email": "mail0@yandex.ru"
+  },
+  {
+    "firstname": "name1",
+    "lastname": "fam1",
+    "mobile": "+79195050011",
+    "email": "mail1@yandex.ru"
+  },
+  {
+    "firstname": "name2",
+    "lastname": "fam2",
+    "mobile": "+79195050012",
+    "email": "mail2@yandex.ru"
+  }
+]

@@ -1,0 +1,20 @@
+<list>
+  <contact>
+    <firstname>name0</firstname>
+    <lastname>fam0</lastname>
+    <mobile>+79195050010</mobile>
+    <email>mail0@yandex.ru</email>
+  </contact>
+  <contact>
+    <firstname>name1</firstname>
+    <lastname>fam1</lastname>
+    <mobile>+79195050011</mobile>
+    <email>mail1@yandex.ru</email>
+  </contact>
+  <contact>
+    <firstname>name2</firstname>
+    <lastname>fam2</lastname>
+    <mobile>+79195050012</mobile>
+    <email>mail2@yandex.ru</email>
+  </contact>
+</list>
