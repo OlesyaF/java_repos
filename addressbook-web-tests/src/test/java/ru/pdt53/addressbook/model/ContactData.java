@@ -3,32 +3,69 @@ package ru.pdt53.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
+@Entity
+@Table (name = "addressbook")
 @XStreamAlias("contact")
 public class ContactData {
+
+  @Id
+  @Column (name= "id")
   @XStreamOmitField
   private int id = Integer.MAX_VALUE;
+
+  @Column (name= "firstname")
   @Expose
   private String firstname;
+
+  @Column (name= "lastname")
   @Expose
   private String lastname;
+
+  @Transient
   private String address;
+
+  @Column (name= "home")
+  @Type(type = "text")
   private String home;
+
+  @Column (name= "work")
+  @Type(type = "text")
   private String work;
+
+  @Column (name= "mobile")
+  @Type(type = "text")
   @Expose
   private String mobile;
+
+  @Transient
   private String allPhones;
+
   @Expose
+  @Transient
   private String email;
+
+  @Transient
   private String email2;
+
+  @Transient
   private String email3;
+
+  @Transient
   private String allMails;
+
   @Expose
+  @Transient
   private String group;
-  private File photo;
+
+  @Column (name= "photo")
+  @Type(type = "text")
+  private String photo;
 
   @Override
   public boolean equals(Object o) {
@@ -112,7 +149,7 @@ public class ContactData {
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
@@ -150,7 +187,7 @@ public class ContactData {
 
   public String getAllMails() { return allMails; }
 
-  public File getPhoto() { return photo; }
+  public File getPhoto() { return new File(photo); }
 
   @Override
   public String toString() {

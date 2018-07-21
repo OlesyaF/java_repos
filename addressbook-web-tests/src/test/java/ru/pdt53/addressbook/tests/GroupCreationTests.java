@@ -60,11 +60,11 @@ public class GroupCreationTests extends TestBase {
   @Test(dataProvider = "validGroupsFromJson")
   public void testGroupCreation(GroupData group) {
     logger.info("Start test testGroupCreation");
+    Groups before = app.db().groups();
     app.goTo().groupPage();
-    Groups before = app.group().all();
     app.group().create(group);
     assertThat(app.group().count(), equalTo(before.size() + 1));
-    Groups after = app.group().all();
+    Groups after = app.db().groups();
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     logger.info("Stop test testGroupCreation");
@@ -72,13 +72,12 @@ public class GroupCreationTests extends TestBase {
 
   @Test(enabled = false) //проверяет, что нельзя создать группу с апострофом в названии
   public void testBadGroupCreation() {
-    app.goTo().groupPage();
-    Groups before = app.group().all();
+    Groups before = app.db().groups();
     GroupData group = new GroupData().withName("group'A");
+    app.goTo().groupPage();
     app.group().create(group);
     assertThat(app.group().count(), equalTo(before.size()));
-    Groups after = app.group().all();
+    Groups after = app.db().groups();
     assertThat(after, equalTo(before));
   }
-
 }
