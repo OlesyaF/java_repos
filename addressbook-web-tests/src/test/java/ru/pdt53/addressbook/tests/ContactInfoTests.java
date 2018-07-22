@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.pdt53.addressbook.model.ContactData;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -14,19 +15,22 @@ public class ContactInfoTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.contact().all().size() == 0) {
+    if (app.db().contacts().size() == 0) {
+      app.goTo().HomePage();
       app.contact().create(new ContactData()
               .withFirstname("anna").withLastname("petrova")
               .withAddress("country city" + "\n" + "street" + "\n" + "house room")
               .withHomePhone("+7495111").withMobilePhone("7(916)222").withWorkPhone("499 333")
               .withEmail("anpet@yandex.ru").withEmail2("test@mail.ru").withEmail3("r.com")
+              .withPhoto(new File("src/test/resources/rose.jpg"))
               .withGroup("groupA"), true);
-      app.goTo().HomePage();
     }
   }
 
   @Test
   public void testContactInfo() {
+    app.goTo().HomePage();
+
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 

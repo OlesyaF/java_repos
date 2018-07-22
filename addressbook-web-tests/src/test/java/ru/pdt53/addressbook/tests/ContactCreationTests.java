@@ -55,26 +55,12 @@ public class ContactCreationTests extends TestBase {
 
   @Test(dataProvider = "validContactsFromXml")
   public void testContactCreation(ContactData contact) {
+    Contacts before = app.db().contacts();
     app.goTo().HomePage();
-    Contacts before = app.contact().all();
     app.contact().create(contact, true);
     app.goTo().HomePage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
-    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-  }
-
-  @Test(enabled = false) //тест создания контакта с загрузкой изображения
-  public void testContactCreationWithPic() {
-    app.goTo().HomePage();
-    Contacts before = (Contacts) app.contact().all();
-    File photo = new File("src/test/resources/rose.jpg");
-    ContactData contact = new ContactData().withFirstname("vitaly").withLastname("polev").withPhoto(photo)
-            .withMobilePhone("+79161013301").withEmail("vipo@yandex.ru").withGroup("groupA");
-    app.contact().create(contact, true);
-    app.goTo().HomePage();
-    assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = (Contacts) app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
@@ -85,5 +71,4 @@ public class ContactCreationTests extends TestBase {
     File photo = new File("src/test/resources/rose.jpg");
     System.out.println(photo.exists());
   }
-
 }
