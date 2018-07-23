@@ -20,6 +20,19 @@ public class ContactHelper extends BaseHelper {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
+  public void fillNewAddFormByGen(ContactData contactData) {
+    type(By.name("firstname"), contactData.getFirstname());
+    type(By.name("lastname"), contactData.getLastname());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("home"), contactData.getHomePhone());
+    type(By.name("mobile"), contactData.getMobilePhone());
+    type(By.name("work"), contactData.getWorkPhone());
+    type(By.name("email"), contactData.getEmail());
+    type(By.name("email2"), contactData.getEmail2());
+    type(By.name("email3"), contactData.getEmail3());
+    attach(By.name("photo"), contactData.getPhoto());
+  }
+
   public void fillNewAddForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
@@ -33,7 +46,11 @@ public class ContactHelper extends BaseHelper {
     attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group")))
+                .selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -63,6 +80,13 @@ public class ContactHelper extends BaseHelper {
     wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
   }
 
+  public void createByGen(ContactData contact) {
+    gotoNewAddPage();
+    fillNewAddFormByGen(contact);
+    saveNewContact();
+    contactCache = null;
+  }
+
   public void create(ContactData contact, boolean creation) {
     gotoNewAddPage();
     fillNewAddForm(contact, creation);
@@ -71,10 +95,10 @@ public class ContactHelper extends BaseHelper {
   }
 
   public void modify(ContactData contact, boolean creation) {
-   selectModificatedContactById(contact.getId());
-   fillNewAddForm(contact, false);
-   submitContactModification();
-   contactCache = null;
+    selectModificatedContactById(contact.getId());
+    fillNewAddForm(contact, false);
+    submitContactModification();
+    contactCache = null;
   }
 
   public void delete(ContactData contact) {

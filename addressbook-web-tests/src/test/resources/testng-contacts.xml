@@ -3,7 +3,7 @@
 <suite name="Suite1" verbose="1">
     <test name="Contacts">
         <classes>
-            <class name="ru.pdt53.addressbook.tests.ContactCreationTests"/>
+            <class name="ru.pdt53.addressbook.tests.ContactGenerationTests"/>
         </classes>
     </test>
 </suite>

@@ -22,8 +22,7 @@ public class ContactInfoTests extends TestBase {
               .withAddress("country city" + "\n" + "street" + "\n" + "house room")
               .withHomePhone("+7495111").withMobilePhone("7(916)222").withWorkPhone("499 333")
               .withEmail("anpet@yandex.ru").withEmail2("test@mail.ru").withEmail3("r.com")
-              .withPhoto(new File("src/test/resources/rose.jpg"))
-              .withGroup("groupA"), true);
+              .withPhoto(new File("src/test/resources/rose.jpg")),true);
     }
   }
 
