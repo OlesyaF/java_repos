@@ -117,6 +117,19 @@ public class ContactHelper extends BaseHelper {
     contactCache = null;
   }
 
+  public void remove(ContactData contact, GroupData group) {
+    selectReducedGroup(group.getName());
+    selectContactById(contact.getId());
+    removeSelectedContacts();
+    contactCache = null;
+  }
+
+  private void removeSelectedContacts() { click(By.name("remove")); }
+
+  private void selectReducedGroup(String name) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(name);
+   }
+
   private void addSelectedContacts() { click(By.xpath("//div/div[4]/form[2]/div[4]/input")); }
 
   private void selectExtensibleGroup(String name) {

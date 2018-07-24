@@ -53,6 +53,14 @@ public class ContactAddToGroupTests extends TestBase {
               .withFirstname("vera").withLastname("simonova").withEmail("vsi@yandex.ru")
               .withPhoto(new File("src/test/resources/rose.jpg"));
       app.contact().create(addedContact, true);
+      Contacts before = app.db().contacts();
+      label2:
+      for (ContactData contact : before) {
+        if (contact.getGroups().size() == 0) {
+          addedContact = contact;
+          break label2;
+        }
+      }
     }
 
     Contacts before = app.db().contacts();
