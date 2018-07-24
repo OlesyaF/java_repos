@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.pdt53.addressbook.model.ContactData;
 import ru.pdt53.addressbook.model.Contacts;
+import ru.pdt53.addressbook.model.GroupData;
+import ru.pdt53.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -108,6 +110,19 @@ public class ContactHelper extends BaseHelper {
     contactCache = null;
   }
 
+  public void add(ContactData contact, GroupData group) {
+    selectContactById(contact.getId());
+    selectExtensibleGroup(group.getName());
+    addSelectedContacts();
+    contactCache = null;
+  }
+
+  private void addSelectedContacts() { click(By.xpath("//div/div[4]/form[2]/div[4]/input")); }
+
+  private void selectExtensibleGroup(String name) {
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(name);
+  }
+
   public boolean isThereContact() {
     return isElementPresent(By.name("selected[]"));
   }
@@ -155,4 +170,5 @@ public class ContactHelper extends BaseHelper {
             .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
             .withEmail(email).withEmail2(email2).withEmail3(email3);
   }
+
 }

@@ -2,6 +2,7 @@ package ru.pdt53.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class NavigationHelper extends BaseHelper {
 
@@ -24,4 +25,13 @@ public class NavigationHelper extends BaseHelper {
     }
     click(By.linkText("home"));
   }
+
+  public void HomePageAllGroup() {
+    if (isElementPresent(By.id("maintable"))) {
+      return;
+    }
+    click(By.linkText("home"));
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
+  }
+
 }

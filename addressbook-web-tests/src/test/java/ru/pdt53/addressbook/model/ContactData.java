@@ -196,13 +196,14 @@ public class ContactData {
             Objects.equals(firstname, that.firstname) &&
             Objects.equals(lastname, that.lastname) &&
             Objects.equals(mobile, that.mobile) &&
-            Objects.equals(email, that.email);
+            Objects.equals(email, that.email) &&
+            Objects.equals(groups, that.groups);
   }
 
   @Override
   public int hashCode() {
 
-    return Objects.hash(id, firstname, lastname, mobile, email);
+    return Objects.hash(id, firstname, lastname, mobile, email, groups);
   }
 
   public File getPhoto() {
