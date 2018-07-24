@@ -18,7 +18,7 @@ public class ContactAddToGroupTests extends TestBase {
   public void ensurePreconditions() {
     if (app.db().groups().size() == 0) {
       app.goTo().groupPage();
-      app.group().create(new GroupData().withName("group_1"));
+      app.group().create(new GroupData().withName("group_A"));
     }
 
     if (app.db().contacts().size() == 0) {
@@ -36,35 +36,37 @@ public class ContactAddToGroupTests extends TestBase {
     Groups groups = app.db().groups();
 
     ContactData addedContact = null;
-    GroupData extensibleGroup = null;
 
     label:
     for (ContactData contact : contacts) {
-      for (GroupData group : groups) {
-        if (contact.getGroups().size() != groups.size()) {
-          if (contact.getGroups().contains(group)) {
-          } else {
-            addedContact = contact;
-            extensibleGroup = group;
-            break label;
-          }
-        }
+      if (contact.getGroups().size() == 0) {
+        addedContact = contact;
+        break label;
       }
     }
 
-    if (extensibleGroup == null) {
-      addedContact = contacts.iterator().next();
-      extensibleGroup = new GroupData().withName("group_ZZZ");
-      app.goTo().groupPage();
-      app.group().create(extensibleGroup);
+    GroupData extensibleGroup = groups.iterator().next();
+
+    if (addedContact == null) {
+      app.goTo().HomePage();
+      addedContact = new ContactData()
+              .withFirstname("vera").withLastname("simonova").withEmail("vsi@yandex.ru")
+              .withPhoto(new File("src/test/resources/rose.jpg"));
+      app.contact().create(addedContact, true);
     }
 
     Contacts before = app.db().contacts();
 
+    app.goTo().HomePageAllGroup();
     app.contact().add(addedContact, extensibleGroup);
 
     app.goTo().HomePageAllGroup();
     assertThat(app.contact().count(), equalTo(before.size()));
+    Contacts after = app.db().contacts();
+    assertThat(after, equalTo(before.without(addedContact).withAdded(new ContactData()
+            .withId(addedContact.getId()).withFirstname(addedContact.getFirstname()).withLastname(addedContact.getLastname())
+            .withMobilePhone(addedContact.getMobilePhone()).withEmail(addedContact.getEmail())
+            .inGroup(extensibleGroup))));
     verifyContactListInUI();
   }
 
