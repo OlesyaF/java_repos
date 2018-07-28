@@ -37,7 +37,11 @@ public class ContactRemoveFromGroupTests extends TestBase {
     Groups groups = app.db().groups();
 
     ContactData removedContact = null;
+    Integer removedContactId;
     GroupData reducedGroup = null;
+
+    Groups groupsBefore = null;
+    Groups groupsAfter = null;
 
     label1:
     for (ContactData contact : contacts) {
@@ -71,17 +75,36 @@ public class ContactRemoveFromGroupTests extends TestBase {
       }
     }
 
+    removedContactId = removedContact.getId();
+
     Contacts before = app.db().contacts();
+    for (ContactData contact : before) {
+      if (contact.getId() == removedContactId) {
+        groupsBefore = contact.getGroups();
+      }
+    }
 
     app.goTo().HomePageAllGroup();
     app.contact().remove(removedContact, reducedGroup);
 
-    app.goTo().HomePageAllGroup();
-    assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.db().contacts();
+    for (ContactData contact : after) {
+      if (contact.getId() == removedContactId) {
+        groupsAfter = contact.getGroups();
+      }
+    }
+
+    app.goTo().HomePageAllGroup();
+
+    groupsBefore.remove(reducedGroup);
+    assertThat(groupsAfter, equalTo(groupsBefore));
+
+    assertThat(app.contact().count(), equalTo(before.size()));
+
     assertThat(after, equalTo(before.without(removedContact).withAdded(new ContactData()
             .withId(removedContact.getId()).withFirstname(removedContact.getFirstname()).withLastname(removedContact.getLastname())
             .withMobilePhone(removedContact.getMobilePhone()).withEmail(removedContact.getEmail()))));
+
     verifyContactListInUI();
   }
 

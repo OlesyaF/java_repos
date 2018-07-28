@@ -36,6 +36,11 @@ public class ContactAddToGroupTests extends TestBase {
     Groups groups = app.db().groups();
 
     ContactData addedContact = null;
+    Integer addedContactId;
+    GroupData extensibleGroup = groups.iterator().next();
+
+    Groups groupsBefore = null;
+    Groups groupsAfter = null;
 
     label:
     for (ContactData contact : contacts) {
@@ -45,17 +50,15 @@ public class ContactAddToGroupTests extends TestBase {
       }
     }
 
-    GroupData extensibleGroup = groups.iterator().next();
-
     if (addedContact == null) {
       app.goTo().HomePage();
       addedContact = new ContactData()
               .withFirstname("vera").withLastname("simonova").withEmail("vsi@yandex.ru")
               .withPhoto(new File("src/test/resources/rose.jpg"));
       app.contact().create(addedContact, true);
-      Contacts before = app.db().contacts();
+      contacts = app.db().contacts();
       label2:
-      for (ContactData contact : before) {
+      for (ContactData contact : contacts) {
         if (contact.getGroups().size() == 0) {
           addedContact = contact;
           break label2;
@@ -63,18 +66,36 @@ public class ContactAddToGroupTests extends TestBase {
       }
     }
 
+    addedContactId = addedContact.getId();
+
     Contacts before = app.db().contacts();
+    for (ContactData contact : before) {
+      if (contact.getId() == addedContactId) {
+        groupsBefore = contact.getGroups();
+      }
+    }
 
     app.goTo().HomePageAllGroup();
     app.contact().add(addedContact, extensibleGroup);
 
-    app.goTo().HomePageAllGroup();
-    assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.db().contacts();
+    for (ContactData contact : after) {
+      if (contact.getId() == addedContactId) {
+        groupsAfter = contact.getGroups();
+      }
+    }
+
+    app.goTo().HomePageAllGroup();
+
+    groupsBefore.add(extensibleGroup);
+    assertThat(groupsAfter, equalTo(groupsBefore));
+
+    assertThat(app.contact().count(), equalTo(before.size()));
     assertThat(after, equalTo(before.without(addedContact).withAdded(new ContactData()
             .withId(addedContact.getId()).withFirstname(addedContact.getFirstname()).withLastname(addedContact.getLastname())
             .withMobilePhone(addedContact.getMobilePhone()).withEmail(addedContact.getEmail())
             .inGroup(extensibleGroup))));
+
     verifyContactListInUI();
   }
 
