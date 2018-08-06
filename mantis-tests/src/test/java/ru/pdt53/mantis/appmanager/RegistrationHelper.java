@@ -1,8 +1,6 @@
 package ru.pdt53.mantis.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import ru.pdt53.mantis.tests.TestBase;
 
 public class RegistrationHelper extends HelperBase {
 
