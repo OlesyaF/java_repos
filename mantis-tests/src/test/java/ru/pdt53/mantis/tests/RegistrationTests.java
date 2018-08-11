@@ -7,6 +7,7 @@ import ru.lanwen.verbalregex.VerbalExpression;
 import ru.pdt53.mantis.model.MailMessage;
 
 import javax.mail.MessagingException;
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,7 +21,8 @@ public class RegistrationTests extends TestBase {
   }
 
   @Test
-  public void testRegistration() throws InterruptedException, MessagingException, IOException {
+  public void testRegistration() throws InterruptedException, MessagingException, IOException, ServiceException {
+
     long now = System.currentTimeMillis();
     String password = "password";
     String user = String.format("auser%s", now);
@@ -38,7 +40,7 @@ public class RegistrationTests extends TestBase {
     return regex.getText(mailMessage.text);
   }
 
-  @AfterMethod (alwaysRun = true)
+  @AfterMethod(alwaysRun = true)
   public void stopMailServer() {
     app.mail().stop();
   }

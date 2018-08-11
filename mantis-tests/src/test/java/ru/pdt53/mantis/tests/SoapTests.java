@@ -1,6 +1,5 @@
 package ru.pdt53.mantis.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.pdt53.mantis.model.Issue;
 import ru.pdt53.mantis.model.Project;
@@ -25,10 +24,14 @@ public class SoapTests extends TestBase {
 
   @Test
   public void testCreateIssue() throws RemoteException, ServiceException, MalformedURLException {
+
+    skipIfNotFixed(0000001);
+
     Set<Project> projects = app.soap().getProjects();
     Issue issue = new Issue()
             .withSummary("Test summary").withDescription("Test issue description").withProject(projects.iterator().next());
     Issue created = app.soap().addIssue(issue);
+    System.out.println(issue);
     assertEquals(issue.getSummary(), created.getSummary());
 
   }
