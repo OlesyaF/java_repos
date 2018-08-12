@@ -7,22 +7,24 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.message.BasicNameValuePair;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
-public class RestTests {
+public class RestTests extends TestBase {
 
   @Test
   public void testCreateIssue() throws IOException {
+
+    skipIfNotFixed(127); //127 - Closed, 128 - Resolved, 130 - Open
+
     Set<Issue> oldIssues = getIssues();
-    Issue newIssue = new Issue().withSubject("Test issue").withDescription("New test issue");
+    Issue newIssue = new Issue().withSubject("Test issue FOLESYA4").withDescription("New test issue FOLESYA4");
     int issueId = createIssue(newIssue);
+    System.out.println("Создан баг-репорт: #" + issueId);
     Set<Issue> newIssues = getIssues();
     oldIssues.add(newIssue.withId(issueId));
     assertEquals(newIssues, oldIssues);
@@ -33,7 +35,8 @@ public class RestTests {
     String json = getExecutor().execute(Request.Get("http://bugify.stqa.ru/api/issues.json?limit=1000")).returnContent().asString();
     JsonElement parsed = new JsonParser().parse(json);
     JsonElement issues = parsed.getAsJsonObject().get("issues");
-    return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
+    return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {
+    }.getType());
   }
 
   private Executor getExecutor() {
