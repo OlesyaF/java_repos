@@ -2,6 +2,7 @@ package ru.pdt53.mantis.appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -77,7 +78,7 @@ public class ApplicationManager {
       } else if (browser.equals(org.openqa.selenium.remote.BrowserType.IE)) {
         wd = new InternetExplorerDriver();
       }
-      wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+      wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
       wd.get(properties.getProperty("web.baseUrl"));
 
     }
