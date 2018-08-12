@@ -20,7 +20,7 @@ public class TestBase {
     VerbalExpression regex = VerbalExpression.regex()
             .find("\"state_name\":\"Closed\"").or("\"state_name\":\"Resolved\"").build();
     status = regex.getText(json);
-    //проверяем статус баг-репорта: если state_name != "Closed" or "Resolved", то баг закрыт и тест можно выполнять
+    //проверяем статус баг-репорта: если state_name = "Closed" or "Resolved", то баг закрыт и тест можно выполнять
     if (status.equals("\"state_name\":\"Closed\"") | (status.equals("\"state_name\":\"Resolved\""))) {
       System.out.println("Статус баг-репорта: " + status);
       isIssueOpen = false;
