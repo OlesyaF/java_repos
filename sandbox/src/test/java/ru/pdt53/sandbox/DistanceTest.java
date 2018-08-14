@@ -15,7 +15,7 @@ public class DistanceTest {
     p2.x = 5;
     p2.y = 10;
 
-    Assert.assertEquals(p1.distance1(p2), 2.0);
+    Assert.assertEquals(p1.distance1(p2), 0.0);
   }
 
   @Test
